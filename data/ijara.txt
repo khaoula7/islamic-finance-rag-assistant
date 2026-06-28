@@ -1,0 +1,26 @@
+Definition:
+Ijara is an Islamic finance contract based on leasing. In an Ijara contract, the owner of an asset allows another person to use the asset in exchange for agreed lease payments.
+
+Key Principles:
+Ijara must involve a real asset or service. The ownership of the asset remains with the lessor during the lease period. The customer pays rent for the right to use the asset.
+
+Conditions:
+The leased asset must be halal and usable. The lease duration and payment amount must be clearly agreed upon. Both parties must understand their responsibilities before the contract begins.
+
+Example Scenario:
+A bank purchases equipment and leases it to a business for five years. The business pays monthly lease payments while the bank keeps ownership of the equipment during the lease period.
+
+Comparison with Conventional Finance:
+Ijara differs from a conventional loan because it is based on leasing an asset rather than lending money with interest. The payments in Ijara are considered rent payments instead of interest payments.
+
+Comparison with Murabaha:
+Ijara is a lease contract while Murabaha is a sale contract. In Murabaha, ownership transfers to the customer after the sale. In Ijara, ownership remains with the lessor during the lease period.
+
+Risks or Compliance Issues:
+If the contract transfers all ownership risks to the customer while the lessor keeps legal ownership, the Ijara contract may not meet Shariah requirements. The lessor should remain responsible for major ownership-related maintenance.
+
+Common Misconceptions:
+Some people think Ijara is the same as renting in conventional finance. Although they are similar in some ways, Ijara follows Shariah principles and avoids interest-based structures.
+
+Important Notes:
+Ijara contracts are commonly used in Islamic banking for cars, homes, and equipment financing. Transparency and clear agreement terms are important for Shariah compliance.

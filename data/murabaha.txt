@@ -1,0 +1,26 @@
+Definition:
+Murabaha is an Islamic finance contract based on cost-plus sale. The seller purchases an asset and then sells it to the customer at a known profit margin.
+
+Key Principles:
+Murabaha must involve a real asset. The seller must own the asset before selling it. The customer must know the original cost and the profit amount.
+
+Conditions:
+The asset must be halal. The price and payment schedule must be agreed upon clearly. Ownership must transfer properly before resale.
+
+Example Scenario:
+A bank buys a car for $20,000 and sells it to the customer for $22,000 payable over 24 months.
+
+Comparison with Conventional Finance:
+Murabaha differs from an interest-based loan because it is based on trade and asset ownership rather than lending money with interest.
+
+Comparison with Ijara:
+Murabaha is a sale contract while Ijara is a lease contract. In Murabaha, ownership transfers to the customer after sale.
+
+Risks or Compliance Issues:
+If the bank sells the asset before owning it, the contract may not be Shariah compliant.
+
+Common Misconceptions:
+Some people think Murabaha is identical to a conventional loan. However, the structure and legal basis are different.
+
+Important Notes:
+Transparency is important in Murabaha. The customer should know the cost price and the profit margin.

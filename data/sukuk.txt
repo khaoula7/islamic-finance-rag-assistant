@@ -1,0 +1,26 @@
+Definition:
+Sukuk are Islamic financial certificates that represent ownership or beneficial interest in real assets, projects, or investments. Sukuk are often considered the Islamic alternative to conventional bonds.
+
+Key Principles:
+Sukuk must be linked to real assets or business activities. Investors earn returns from the performance of the underlying assets rather than from interest payments. Sukuk structures must comply with Shariah principles.
+
+Conditions:
+The underlying assets must be halal and clearly identified. The rights and responsibilities of investors must be explained clearly. Sukuk returns should come from asset-generated income or profits.
+
+Example Scenario:
+A company issues Sukuk certificates to finance the construction of a building. Investors purchase the Sukuk and receive returns generated from leasing or using the building.
+
+Comparison with Conventional Finance:
+Sukuk differ from conventional bonds because Sukuk represent ownership in assets while conventional bonds represent debt obligations with interest payments. Sukuk avoid riba, which is prohibited in Islamic finance.
+
+Comparison with Murabaha and Ijara:
+Murabaha focuses on cost-plus asset sales, while Ijara focuses on leasing assets. Sukuk are investment certificates connected to ownership in assets or projects.
+
+Risks or Compliance Issues:
+If Sukuk are structured in a way that guarantees fixed interest-like returns without real asset risk, they may not be Shariah compliant. Proper asset backing is important in Sukuk structures.
+
+Common Misconceptions:
+Some people think Sukuk are exactly the same as conventional bonds. However, Sukuk are based on asset ownership and profit-sharing principles rather than interest-based lending.
+
+Important Notes:
+Sukuk are widely used by governments and companies to raise funds in a Shariah-compliant way. Different types of Sukuk exist depending on the underlying contract structure.
