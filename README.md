@@ -72,6 +72,10 @@ streamlit run app.py
 ### Ijara Question
 ![Ijara](screenshots/ijara.png)
 
+### Murabaha Question
+![Murabaha](screenshots/murabaha.png)
+
+
 ## What I Learned
 
 This project helped me understand:

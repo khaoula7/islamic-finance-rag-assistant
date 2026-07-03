@@ -3,3 +3,4 @@ chromadb
 sentence-transformers
 transformers
 torch
+langchain-text-splitters
