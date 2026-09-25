@@ -33,14 +33,21 @@ The project demonstrates how a domain-specific RAG system can retrieve relevant 
 islamic-finance-rag-assistant/
 ├── app.py
 ├── ingest.py
-├── requirements.txt
-├── README.md
-├── .gitignore
+├── retriever.py
+├── generator.py
+├── test_cases.py
+│
 ├── data/
 │   ├── murabaha.txt
 │   ├── ijara.txt
 │   └── sukuk.txt
-└── screenshots/
+├── screenshots/
+│   ├── murabaha.png
+│   ├── ijara.png
+│   └── sukuk.png
+├── .gitignore
+├── README.md
+└── requirements.txt
 ```
 
 ## Installation
