@@ -70,6 +70,7 @@ if st.button("Get Answer"):
 
             retrieved_docs = retrieval_result["documents"]
             retrieved_metadatas = retrieval_result["metadatas"]
+            retrieved_distances = retrieval_result["distances"]
 
             answer = generate_answer(
                 query=query,
@@ -86,6 +87,10 @@ if st.button("Get Answer"):
                     st.write(
                         "Metadata:",
                         retrieved_metadatas[index],
+                    )
+                    st.write(
+                        "Distances:",
+                        f" Distances: {retrieved_distances[index]:.4f}"
                     )
                     st.write(document)
                     st.divider()
