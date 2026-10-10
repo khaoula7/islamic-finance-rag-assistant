@@ -58,7 +58,7 @@ def generate_answer(query: str, retrieved_docs: list[str], tokenizer, model) -> 
     outputs = model.generate(
         **inputs,
         max_new_tokens=60,
-        min_new_tokens=20,
+        min_new_tokens=8,
         num_beams=4,
         do_sample=False,
         early_stopping=True,
