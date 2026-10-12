@@ -14,11 +14,15 @@ from retriever import detect_contract, retrieve_context
 DATA_DIR = Path("data")
 TOP_K = 2
 
-
 st.set_page_config(
     page_title="Islamic Finance RAG Assistant",
     page_icon="🤖",
 )
+if "answer" not in st.session_state:
+    st.session_state.answer = None
+
+if "retrieval_result" not in st.session_state:
+    st.session_state.retrieval_result = None
 
 st.title("🤖 Islamic Finance RAG Assistant")
 st.write(
@@ -54,10 +58,9 @@ if st.button("Get Answer"):
     else:
         contract = detect_contract(query)
 
-        st.subheader("Answer")
-
         if contract is None:
-            st.write(FALLBACK_ANSWER)
+            st.session_state.answer = FALLBACK_ANSWER
+            st.session_state.retrieval_result = None
 
         else:
             retrieval_result = retrieve_context(
@@ -69,8 +72,6 @@ if st.button("Get Answer"):
             )
 
             retrieved_docs = retrieval_result["documents"]
-            retrieved_metadatas = retrieval_result["metadatas"]
-            retrieved_distances = retrieval_result["distances"]
 
             answer = generate_answer(
                 query=query,
@@ -79,18 +80,47 @@ if st.button("Get Answer"):
                 model=model,
             )
 
-            st.write(answer)
+            st.session_state.answer = answer
+            st.session_state.retrieval_result = retrieval_result
 
-            with st.expander("See Retrieved Context"):
-                for index, document in enumerate(retrieved_docs):
-                    st.markdown(f"**Chunk {index + 1}:**")
-                    st.write(
-                        "Metadata:",
-                        retrieved_metadatas[index],
-                    )
-                    st.write(
-                        "Distances:",
-                        f" Distances: {retrieved_distances[index]:.4f}"
-                    )
-                    st.write(document)
-                    st.divider()
+if st.session_state.answer is not None:
+    st.subheader("Answer")
+    st.write(st.session_state.answer)    
+    
+if st.session_state.retrieval_result is not None:
+    retrieval_result = st.session_state.retrieval_result
+
+    retrieved_docs = retrieval_result["documents"]
+    retrieved_metadatas = retrieval_result["metadatas"]
+    retrieved_distances = retrieval_result["distances"]
+
+    with st.expander("View supporting evidence"):
+        show_technical_details = st.checkbox(
+            "Show technical retrieval details"
+        )
+
+        for index, document in enumerate(retrieved_docs):
+            metadata = retrieved_metadatas[index]
+            distance = retrieved_distances[index]
+
+            source_name = (
+                Path(metadata["source"]).stem.replace("_", " ").title()
+            )
+
+            section_name = metadata["section"]
+
+            st.markdown(f"### {source_name} — {section_name}")
+            st.write(document)
+
+            if show_technical_details:
+                st.caption(
+                    f"Retrieval rank: {index + 1} | "
+                    f"Chunk ID: {metadata['chunk_id']} | "
+                    f"Distance: {distance:.4f} "
+                    f"(lower means semantically closer)"
+                )
+
+            st.divider()
+    
+    
+   
