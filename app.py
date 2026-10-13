@@ -25,9 +25,15 @@ if "retrieval_result" not in st.session_state:
     st.session_state.retrieval_result = None
 
 st.title("🤖 Islamic Finance RAG Assistant")
+
 st.write(
-    "Ask questions about Murabaha, Ijara, or Sukuk "
-    "based on the provided context."
+    "Ask questions about **Murabaha**, **Ijara**, or **Sukuk**. "
+    "Answers are generated only from the project's knowledge base."
+)
+
+st.caption(
+    "Educational tool only — responses should not be treated as "
+    "financial advice or a final Shariah ruling."
 )
 
 @st.cache_resource
@@ -45,13 +51,42 @@ def load_llm():
     """
     return load_generator_model()
 
+def clear_results():
+    """
+    Clear the current question, answer, and retrieval evidence.
+    """
+    st.session_state.query_input = ""
+    st.session_state.answer = None
+    st.session_state.retrieval_result = None
+
 
 collection, embedder = load_rag_system()
 tokenizer, model = load_llm()
 
-query = st.text_input("Ask a question:")
+query = st.text_input(
+    "Your question",
+    placeholder="For example: Must the seller own the asset in Murabaha?",
+    key="query_input",
+)
 
-if st.button("Get Answer"):
+# The first column is three times wider than the second,
+answer_column, clear_column = st.columns([3, 1])
+
+with answer_column:
+    get_answer_clicked = st.button(
+        "Get Answer",
+        type="primary",
+        use_container_width=True,
+    )
+
+with clear_column:
+    st.button(
+        "Clear",
+        use_container_width=True,
+        on_click=clear_results,
+    )
+
+if get_answer_clicked:
     if not query.strip():
         st.warning("Please enter a question.")
 
@@ -63,22 +98,23 @@ if st.button("Get Answer"):
             st.session_state.retrieval_result = None
 
         else:
-            retrieval_result = retrieve_context(
-                query=query,
-                collection=collection,
-                embedder=embedder,
-                top_k=TOP_K,
-                contract=contract,
-            )
+            with st.spinner("Searching the knowledge base and generating an answer..."):
+                retrieval_result = retrieve_context(
+                    query=query,
+                    collection=collection,
+                    embedder=embedder,
+                    top_k=TOP_K,
+                    contract=contract,
+                )
 
-            retrieved_docs = retrieval_result["documents"]
+                retrieved_docs = retrieval_result["documents"]
 
-            answer = generate_answer(
-                query=query,
-                retrieved_docs=retrieved_docs,
-                tokenizer=tokenizer,
-                model=model,
-            )
+                answer = generate_answer(
+                    query=query,
+                    retrieved_docs=retrieved_docs,
+                    tokenizer=tokenizer,
+                    model=model,
+                )
 
             st.session_state.answer = answer
             st.session_state.retrieval_result = retrieval_result
@@ -93,6 +129,8 @@ if st.session_state.retrieval_result is not None:
     retrieved_docs = retrieval_result["documents"]
     retrieved_metadatas = retrieval_result["metadatas"]
     retrieved_distances = retrieval_result["distances"]
+
+    st.markdown("#### Sources used")
 
     with st.expander("View supporting evidence"):
         show_technical_details = st.checkbox(
@@ -119,8 +157,11 @@ if st.session_state.retrieval_result is not None:
                     f"Distance: {distance:.4f} "
                     f"(lower means semantically closer)"
                 )
-
-            st.divider()
+            
+            if(index < TOP_K -1):
+                st.divider()
+            else:
+                st.markdown("\n")
     
     
    

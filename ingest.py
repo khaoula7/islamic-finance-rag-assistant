@@ -39,12 +39,45 @@ def load_text_files(data_dir: Path) -> dict[str, str]:
 
     return texts
 
-
-def chunk_text(document_text: str, source_name: str,) -> list[dict]:
+def split_document_sections(document_text: str) -> list[tuple[str, str]]:
     """
-    Split one document into overlapping chunks.
+    Split a document into sections using blank lines.
+    Returns:
+        A list of:
+        [
+            ("MURABAHA Definition", "Murabaha is..."),
+            ("MURABAHA Conditions", "The asset must...")
+        ]
+    """
+    blocks = document_text.split("\n\n")
+    sections = []
 
-    Each chunk contains its text and identifying metadata.
+    for block in blocks:
+        block = block.strip()
+
+        if not block:
+            continue
+
+        lines = block.splitlines()
+
+        # Ignore a title that has no body text.
+        if len(lines) == 1:
+            continue
+
+        section_name = lines[0].rstrip(":").strip()
+        section_content = "\n".join(lines[1:]).strip()
+
+        if section_content:
+            sections.append(
+                (section_name, section_content)
+            )
+
+    return sections
+
+def chunk_text(document_text: str, source_name: str) -> list[dict]:
+    """
+    Split a document section by section and attach
+    explainable metadata to every chunk.
     """
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=250,
@@ -52,23 +85,31 @@ def chunk_text(document_text: str, source_name: str,) -> list[dict]:
         length_function=len,
     )
 
-    raw_chunks = splitter.split_text(document_text)
     contract_type = Path(source_name).stem.lower()
+    document_sections = split_document_sections(document_text)
 
     chunks = []
+    chunk_id = 0
 
-    for chunk_id, text in enumerate(raw_chunks):
-        chunks.append(
-            {
-                "text": text,
-                "source": source_name,
-                "contract": contract_type,
-                "chunk_id": chunk_id,
-            }
-        )
+    for section_name, section_content in document_sections:
+        section_text = (f"{section_name}:\n{section_content}")
+
+        section_chunks = splitter.split_text(section_text)
+
+        for text in section_chunks:
+            chunks.append(
+                {
+                    "text": text,
+                    "source": source_name,
+                    "contract": contract_type,
+                    "section": section_name,
+                    "chunk_id": chunk_id,
+                }
+            )
+
+            chunk_id += 1
 
     return chunks
-
 
 def create_chunks(texts: dict[str, str]) -> list[dict]:
     """
@@ -120,6 +161,7 @@ def build_vector_store(chunks: list[dict]):
         {
             "source": chunk["source"],
             "contract": chunk["contract"],
+            "section": chunk["section"],
             "chunk_id": chunk["chunk_id"],
         }
         for chunk in chunks
