@@ -158,10 +158,10 @@ if st.session_state.retrieval_result is not None:
                     f"(lower means semantically closer)"
                 )
             
-            if(index < TOP_K -1):
+            if(index < len(retrieved_docs) -1):
                 st.divider()
             else:
-                st.markdown("\n")
+                st.markdown("\n\n")
     
     
    
