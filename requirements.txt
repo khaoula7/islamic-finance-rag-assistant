@@ -1,6 +1,6 @@
-streamlit
-chromadb
-sentence-transformers
-transformers
-torch
-langchain-text-splitters
+chromadb==1.5.9
+langchain-text-splitters==1.1.2
+sentence-transformers==5.6.0
+streamlit==1.59.0
+torch==2.11.0
+transformers==5.13.0
